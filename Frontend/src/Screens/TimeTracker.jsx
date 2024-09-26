@@ -100,14 +100,16 @@ const TimeTracker = () => {
                             <input className='border  text-[15px] border-slate-300 rounded-md  pl-2 pr-5 py-2' name='Work' placeholder='what are you working on?' />
                         </label>
                     </div>
-                    <div className={`${isCollapsed ? 'flex items-center justify-center gap-2 ' : 'flex items-center justify-center gap-2'}`}>
-                        <div className={`${isCollapsed ? 'bg-green-400 text-[15px] px-6 py-2 rounded-lg ' : 'bg-green-400 text-[15px] px-6 py-2 rounded-lg'}`}>
+                    <div className={`${isCollapsed ? 'flex items-center justify-evenly gap-2  w-96' : 'flex items-center justify-evenly gap-2'}`}>
+                        <div className={`${isCollapsed ? 'bg-[#3E6BE0] text-[15px] px-6 py-2 rounded-lg text-white ' : 'bg-[#3E6BE0] text-[15px] px-6 py-2 rounded-lg text-white'}`}>
                             <h1>{formatTime()}</h1>
-                            
                         </div>
-                        <button onClick={startTimer}>Start</button>
-                        <button onClick={stopTimer}>Stop</button>
-                        <button onClick={resetTimer}>Reset</button>
+                        <div className='flex items-center justify-evenly gap-3'>
+                        <button className='flex items-center justify-center gap-1 text-red-700' onClick={startTimer}><VscDebugStart/>Start</button>
+                        <button className='flex items-center justify-center gap-1' onClick={stopTimer}><PiPauseBold/>Stop</button>
+                        <button className='flex items-center justify-center gap-1 text-green-800' onClick={resetTimer}><GrPowerReset/>Reset</button>
+                        </div>
+                        
                     </div>
 
                 </div>
