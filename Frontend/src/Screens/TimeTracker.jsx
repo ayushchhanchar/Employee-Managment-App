@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { CollapsedAtom } from '../atom/Collapsed'
 import SideBar from '../components/SideBar'
@@ -8,6 +8,8 @@ import TimeTrackerNavBar from '../NavigationBar/TimeTrackerNavBar'
 import { VscDebugStart } from "react-icons/vsc";
 import { PiPauseBold } from "react-icons/pi";
 import { GrPowerReset } from "react-icons/gr";
+import { useRef } from 'react';
+
 
 import { useStopwatch, useTimer } from 'react-timer-hook'
 
@@ -18,6 +20,9 @@ const TimeTracker = () => {
 
     const [selectedOption1, setSelectedOption1] = useState(""); // Initial state is empty
     const [selectedOption2, setSelectedOption2] = useState("");
+    const [time, setTime] = useState(0); // time in seconds
+    const [isRunning, setIsRunning] = useState(false);
+    const timerRef = useRef(null); // Reference to hold the timer
 
     const handleChange1 = (e) => {
         setSelectedOption1(e.target.value); // Update state when dropdown value changes
@@ -27,25 +32,43 @@ const TimeTracker = () => {
     };
 
 
-    const startHandler = () => {
-        isRunning ? pause() : start()
-    }
-    const Resethandler = () => {
-        stop()
-        reset()
-    }
+    useEffect(() => {
+        if (isRunning) {
+            timerRef.current = setInterval(() => {
+                setTime((prevTime) => prevTime + 1);
+            }, 1000);
+        }
 
+        return () => {
+            clearInterval(timerRef.current); // Cleanup function
+        };
+    }, [isRunning]);
 
-    const {
-        totalSeconds,
-        seconds,
-        minutes,
-        hours,
-        isRunning,
-        start,
-        pause,
-        reset,
-    } = useStopwatch({ autoStart: true });
+    const startTimer = () => {
+        setIsRunning(true);
+    };
+
+    const stopTimer = () => {
+        setIsRunning(false);
+        clearInterval(timerRef.current);
+    };
+    const resetTimer = () => {
+        setIsRunning(false);
+        clearInterval(timerRef.current);
+        setTime(0);
+    };
+
+    const formatTime = () => {
+        const getHours = Math.floor(time / 3600);
+        const getMinutes = Math.floor((time % 3600) / 60);
+        const getSeconds = time % 60;
+
+        const hours = getHours < 10 ? `0${getHours}` : getHours;
+        const minutes = getMinutes < 10 ? `0${getMinutes}` : getMinutes;
+        const seconds = getSeconds < 10 ? `0${getSeconds}` : getSeconds;
+
+        return `${hours}:${minutes}:${seconds}`;
+    };
 
 
 
@@ -79,16 +102,12 @@ const TimeTracker = () => {
                     </div>
                     <div className={`${isCollapsed ? 'flex items-center justify-center gap-2 ' : 'flex items-center justify-center gap-2'}`}>
                         <div className={`${isCollapsed ? 'bg-green-400 text-[15px] px-6 py-2 rounded-lg ' : 'bg-green-400 text-[15px] px-6 py-2 rounded-lg'}`}>
-                            <span>{hours.toString().padStart(2, '0')}</span>:
-                            <span>{minutes.toString().padStart(2, '0')}</span>:
-                            <span>{seconds.toString().padStart(2, '0')}</span>
+                            <h1>{formatTime()}</h1>
+                            
                         </div>
-                        <button onClick={startHandler} className={`${isCollapsed ? 'bg-red-600 text-white text-[15px] px-6 py-2 rounded-lg ' : 'bg-red-600 text-white text-[15px] px-6 py-2 rounded-lg'}`}>
-                            {isRunning ? <div className='flex justify-center items-center gap-2 '><PiPauseBold className='text-xs' />Stop</div> : <div className='flex justify-center items-center gap-2'><VscDebugStart className='text-xs' /> Start</div>}
-                        </button>
-                        <button onClick={Resethandler} className={`${isCollapsed ? '  text-[15px] px-6 py-2 rounded-lg' : ' text-[15px] px-6 py-2 rounded-lg '}`}>
-                            <div className='flex justify-center items-center gap-2'><GrPowerReset className='text-xs' />Restart</div>
-                        </button>
+                        <button onClick={startTimer}>Start</button>
+                        <button onClick={stopTimer}>Stop</button>
+                        <button onClick={resetTimer}>Reset</button>
                     </div>
 
                 </div>

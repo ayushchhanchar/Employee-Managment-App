@@ -73,7 +73,7 @@ export default function SideBar({titles}) {
             {isCollapsed ? (
               <CiHome className="text-2xl" />
             ) : (
-              <div className="  flex gap-2 justify-center items-center ">
+              <div className=" hover:bg-slate-400 p-5  rounded-full flex gap-2 justify-center items-center ">
                 <CiHome className="text-2xl" />
                 <h1 className="text-2xl">Home</h1>
               </div>
@@ -94,7 +94,7 @@ export default function SideBar({titles}) {
             {isCollapsed ? (
               <CiTimer className="text-2xl" />
             ) : (
-              <div className="flex gap-2 justify-center items-center">
+              <div className="  flex gap-2 justify-center items-center">
                 <CiTimer className="text-2xl" />
                 <h1 className="text-2xl">Time Tracker</h1>
               </div>
