@@ -105,9 +105,9 @@ const TimeTracker = () => {
                             <h1>{formatTime()}</h1>
                         </div>
                         <div className='flex items-center justify-evenly gap-3'>
-                        <button className='flex items-center justify-center gap-1 text-red-700' onClick={startTimer}><VscDebugStart/>Start</button>
-                        <button className='flex items-center justify-center gap-1' onClick={stopTimer}><PiPauseBold/>Stop</button>
-                        <button className='flex items-center justify-center gap-1 text-green-800' onClick={resetTimer}><GrPowerReset/>Reset</button>
+                            <button className='flex items-center justify-center gap-1 text-red-700' onClick={startTimer}><VscDebugStart/>Start</button>
+                            <button className='flex items-center justify-center gap-1 text-black' onClick={stopTimer}><PiPauseBold/>Stop</button>
+                            <button className='flex items-center justify-center gap-1 text-green-800' onClick={resetTimer}><GrPowerReset/>Reset</button>
                         </div>
                         
                     </div>
