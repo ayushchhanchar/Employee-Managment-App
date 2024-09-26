@@ -35,32 +35,33 @@ export const Organization = () => {
 
 
 
-                <div class="w-full max-w-xl flex flex-col justify-center  absolute top-32 right-14 p-4 bg-white border border-gray-200 rounded-lg shadow ">
-                    <h5 class=" text-center mb-5 border-b-2 text-base font-semibold text-gray-900">
+                <div class="w-full max-w-5xl flex flex-col justify-center  absolute top-32 right-14 p-4 bg-white border border-gray-200 rounded-lg shadow ">
+                    <h5 class=" text-center text-2xl mb-5 border-b-2  font-semibold text-gray-900">
                         Services
                     </h5>
 
-                    <div className='flex gap-5 flex-wrap '>
-                        <div className='h-10 p-2  border ring-2 rounded-lg ring-gray-100 w-64 flex  items-center hover:ring-blue-400  '>
-                            <IoUmbrellaOutline className='text-xl font-bold'  />
+                    <div className='flex flex- flex-wrap gap-6 '>
+                        <div className=' h-44 p-2  flex-auto bg-white border border-gray-200 rounded-lg shadow w-64 flex flex-col  items-center hover:bg-gray-100  '>
+                            <IoUmbrellaOutline className='text-xl font-bold' />
                             <h5 className='ml-2 font-semibold'>Leave Tracker</h5>
                         </div>
-                        <div className='h-10 p-2  border ring-2 rounded-lg ring-gray-100 w-64 flex  items-center hover:ring-blue-400  '>
-                            <IoUmbrellaOutline className='text-xl font-bold'  />
+                        <div className=' h-44 p-2  flex-auto bg-white border border-gray-200 rounded-lg shadow w-64 flex flex-col  items-center hover:bg-gray-100  '>
+                            <IoUmbrellaOutline className='text-xl font-bold' />
                             <h5 className='ml-2 font-semibold'>Leave Tracker</h5>
-                        </div><div className='h-10 p-2  border ring-2 rounded-lg ring-gray-100 w-64 flex  items-center hover:ring-blue-400  '>
-                            <IoUmbrellaOutline className='text-xl font-bold'  />
+                        </div> <div className=' h-44 p-2  flex-auto bg-white border border-gray-200 rounded-lg shadow w-64 flex flex-col  items-center hover:bg-gray-100  '>
+                            <IoUmbrellaOutline className='text-xl font-bold' />
                             <h5 className='ml-2 font-semibold'>Leave Tracker</h5>
-                        </div><div className='h-10 p-2  border ring-2 rounded-lg ring-gray-100 w-64 flex  items-center hover:ring-blue-400  '>
-                            <IoUmbrellaOutline className='text-xl font-bold'  />
+                        </div> <div className=' h-44 p-2  flex-auto bg-white border border-gray-200 rounded-lg shadow w-64 flex flex-col  items-center hover:bg-gray-100  '>
+                            <IoUmbrellaOutline className='text-xl font-bold' />
                             <h5 className='ml-2 font-semibold'>Leave Tracker</h5>
-                        </div><div className='h-10 p-2  border ring-2 rounded-lg ring-gray-100 w-64 flex  items-center hover:ring-blue-400  '>
-                            <IoUmbrellaOutline className='text-xl font-bold'  />
+                        </div> <div className=' h-44 p-2  flex-auto bg-white border border-gray-200 rounded-lg shadow w-64 flex flex-col  items-center hover:bg-gray-100  '>
+                            <IoUmbrellaOutline className='text-xl font-bold' />
                             <h5 className='ml-2 font-semibold'>Leave Tracker</h5>
-                        </div><div className='h-10 p-2  border ring-2 rounded-lg ring-gray-100 w-64 flex  items-center hover:ring-blue-400  '>
-                            <IoUmbrellaOutline className='text-xl font-bold'  />
+                        </div> <div className=' h-44 p-2  flex-auto bg-white border border-gray-200 rounded-lg shadow w-64 flex flex-col  items-center hover:bg-gray-100  '>
+                            <IoUmbrellaOutline className='text-xl font-bold' />
                             <h5 className='ml-2 font-semibold'>Leave Tracker</h5>
                         </div>
+                        
 
 
                     </div>

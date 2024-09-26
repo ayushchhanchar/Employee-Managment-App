@@ -77,7 +77,7 @@ const TimeTracker = () => {
             <SideBar />
             <TimeTrackerNavBar />
             <HomeNavBar2 titles={["Timelogs"]} name={"mydata"} main={"timetracker"} />
-            <div className={`${isCollapsed ? 'bg-slate-300  w-[95vw] float-end p-16 flex flex-wrap gap-10' : 'bg-slate-300 flex-wrap  w-[80%] float-end  px-28  py-14  flex gap-28'}`}>
+            <div className={`${isCollapsed ? 'bg-slate-300 h-full  w-[95vw] float-end p-16 flex flex-wrap gap-10' : 'bg-slate-300 flex-wrap  h-full w-[80%] float-end  px-28  py-14  flex gap-28'}`}>
                 <div className='h-16 w-[95vw] rounded-lg bg-white flex items-center justify-between gap-9 px-14'>
                     <div className='flex justify-center items-center gap-4'>
                         <label>
