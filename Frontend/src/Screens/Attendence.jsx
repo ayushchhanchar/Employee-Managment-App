@@ -51,7 +51,6 @@ const Attendence = ({titles,main}) => {
     <>
       <SideBar />
       <AttendenceNavBar />
-      {/* <HomeNavBar titles={["Myspace"]} /> */}
       <HomeNavBar2 titles={["Attendence Summary"]} name={"mydata"} main={"attendence"} />
       <div className={`${isCollapsed ? 'bg-slate-300  w-[95vw] float-end p-16 ' : 'bg-slate-300  w-[80%] float-end  px-28  py-14  gap-28'}`}>
           <h1 className="text-xl font-bold mb-4">Attendance Calendar</h1>

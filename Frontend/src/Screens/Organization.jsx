@@ -14,7 +14,7 @@ export const Organization = () => {
             <SideBar />
             <HomeNavBar />
             <HomeNavBar2 titles={["Overview", "Announcement"]} name={"Organization"} main={"home"} />
-            <div className={`${isCollapsed ? ' relative bg-slate-300 min-h-max  w-[95%] float-end   ' : ' bg-slate-300 relative h-[100vh] w-[80%] float-end '}`}>
+            <div className={`${isCollapsed ? ' relative  min-h-max  w-[95%] float-end   ' : '  relative h-[100vh] w-[80%] float-end '}`}>
                 <div className='h-40 w-full relative bg-black' >
                     <img className='h-full w-full relative bg-contain bg-center' src="https://images.unsplash.com/photo-1718062455499-c362df48a68d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                 </div>
@@ -35,7 +35,7 @@ export const Organization = () => {
 
 
 
-                <div class="w-full max-w-5xl flex flex-col justify-center  absolute top-32 right-14 p-4 bg-white border border-gray-200 rounded-lg shadow ">
+                <div className={`${isCollapsed ? '"w-full max-w-5xl flex flex-col justify-center  absolute top-32 right-14 p-4 bg-white border border-gray-200 rounded-lg shadow "  ' : '"w-full max-w-3xl flex flex-col justify-center  absolute top-32 right-14 p-4 bg-white border border-gray-200 rounded-lg shadow " '}`}>
                     <h5 class=" text-center text-2xl mb-5 border-b-2  font-semibold text-gray-900">
                         Services
                     </h5>
@@ -61,7 +61,7 @@ export const Organization = () => {
                             <IoUmbrellaOutline className='text-xl font-bold' />
                             <h5 className='ml-2 font-semibold'>Leave Tracker</h5>
                         </div>
-                        
+
 
 
                     </div>
