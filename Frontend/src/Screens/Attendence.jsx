@@ -4,98 +4,101 @@ import { CollapsedAtom } from '../atom/Collapsed'
 import SideBar from '../components/SideBar'
 import HomeNavBar from '../NavigationBar/HomeNavBar'
 import HomeNavBar2 from '../NavigationBar/HomeNavBar2'
-import Calendar from 'react-calendar'
-import '../styles/Calender.css';
+// import Calendar from 'react-calendar'
+// import '../styles/Calender.css';
 import AttendenceNavBar from '../NavigationBar/attendenceNavBar'
 // import 'react-calendar/dist/Calendar.css';
-import { FaCheckCircle } from "react-icons/fa"; //
+import { Calendar, Modal, Radio } from 'antd';
+import 'antd/dist/reset.css';
 
 
 
 const Attendence = ({titles,main}) => {
   const isCollapsed = useRecoilValue(CollapsedAtom);
 
-  const [selectedDate, setSelectedDate] = useState(null); // Date clicked
-  const [attendance, setAttendance] = useState({}); // Store attendance data
-  const [popupVisible, setPopupVisible] = useState(false); // Control popup visibility
-  const [selectedStatus, setSelectedStatus] = useState(''); // Store selected status
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [attendance, setAttendance] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [status, setStatus] = useState('');
 
-  // Handle date click
-  const onDateClick = (date) => {
-    setSelectedDate(date);
-    setPopupVisible(true); // Show popup on date click
+  const handleDateClick = (date) => {
+    setSelectedDate(date.format('YYYY-MM-DD'));
+    setStatus(attendance[date.format('YYYY-MM-DD')] || ''); // Set previous status if exists
+    setIsModalOpen(true);
   };
 
-  // Handle status selection
-  const handleStatusSelect = (status) => {
-    setAttendance({
-      ...attendance,
-      [selectedDate.toDateString()]: status, // Store status for selected date
-    });
-    setPopupVisible(false); // Close popup after selection
+  const handleOk = () => {
+    if (selectedDate) {
+      setAttendance({
+        ...attendance,
+        [selectedDate]: status, // Set status for the selected date
+      });
+    }
+    setIsModalOpen(false);
   };
 
-  // Render tile content for marking attendance on the calendar
-  const tileContent = ({ date, view }) => {
-    if (view === 'month') {
-      const status = attendance[date.toDateString()];
-      if (status === 'Present') return <div className="text-green-600">Present</div>;
-      if (status === 'Absent') return <div className="text-red-600">Absent</div>;
-      if (status === 'Holiday') return <div className="text-blue-600">Holiday</div>;
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
+
+  const dateCellRender = (value) => {
+    const currentDate = value.format('YYYY-MM-DD');
+    const dayStatus = attendance[currentDate];
+    if (dayStatus) {
+      return (
+        <div
+          className={`text-center p-1 rounded ${
+            dayStatus === 'Present'
+              ? 'bg-green-200 text-green-700'
+              : dayStatus === 'Absent'
+              ? 'bg-red-200 text-red-700'
+              : 'bg-yellow-200 text-yellow-700'
+          }`}
+        >
+          {dayStatus}
+        </div>
+      );
     }
     return null;
   };
-
 
   return (
     <>
       <SideBar />
       <AttendenceNavBar />
       <HomeNavBar2 titles={["Attendence Summary"]} name={"mydata"} main={"attendence"} />
-      <div className={`${isCollapsed ? 'bg-slate-300  w-[95vw] float-end p-16 ' : 'bg-slate-300  w-[80%] float-end  px-28  py-14  gap-28'}`}>
-          <h1 className="text-xl font-bold mb-4">Attendance Calendar</h1>
-          <Calendar
-            onClickDay={onDateClick}
-            tileContent={tileContent}
-            className="border rounded-lg shadow-md"
-          />
+      <div className={`${isCollapsed ? 'bg-slate-300 w-[95vw] h-[140vh] float-end p-10  flex flex-col items-center justify-center ' : ' bg-slate-300 h-[140vh] w-[80vw] float-end  px-28  py-14  gap-2  flex flex-col items-center justify-center p-4'}`}>
+          {/* <div className="w-full h-screen flex flex-col items-center justify-center bg-gray-50 p-4"> */}
+          <h1 className="text-2xl font-bold my-10">Attendance Calendar</h1>
+          
+          <div className="w-[100vw] max-w-4xl bg-white rounded-lg shadow-lg p-6">
+            {/* Ant Design Calendar */}
+            <Calendar 
+              dateCellRender={dateCellRender}
+              onSelect={handleDateClick}
+            />
+          </div>
 
-          {/* Popup box for selecting status */}
-          {popupVisible && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-6 rounded-lg shadow-lg space-y-4">
-                <h2 className="text-lg font-semibold">Select Attendance Status</h2>
-                <div className='flex items-center justify-center gap-5'>
-                  <button
-                    onClick={() => handleStatusSelect('Present')}
-                    className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
-                  >
-                    Present
-                  </button>
-                  <button
-                    onClick={() => handleStatusSelect('Absent')}
-                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
-                  >
-                    Absent
-                  </button>
-                  <button
-                    onClick={() => handleStatusSelect('Holiday')}
-                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-                  >
-                    Holiday
-                  </button>
-                  <button
-                    onClick={() => setPopupVisible(false)}
-                    className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}  
-
-      </div>
+          {/* Ant Design Modal for marking attendance */}
+          <Modal
+            title={`Select Status for ${selectedDate}`}
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            centered
+          >
+            <Radio.Group onChange={handleStatusChange} value={status}>
+              <Radio value="Present">Present</Radio>
+              <Radio value="Absent">Absent</Radio>
+              <Radio value="Holiday">Holiday</Radio>
+            </Radio.Group>
+          </Modal>
+        </div>
+    {/* </div> */}
     </>
   )
 }
